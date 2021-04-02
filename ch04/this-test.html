@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>this-test</title>
+</head>
+
+<body>
+</body>
+<script>
+    function whats_my_context_in_normal_function() {
+        return this
+    }
+    const whats_my_context_in_arrow_function = () => this
+
+    /* Test 'this' in arrow function */
+    console.log("call whats_my_context_in_arrow_function function directly")
+    let this_in_arrow_function = whats_my_context_in_arrow_function()
+    console.log("return this in directly called arrow function: ", this_in_arrow_function)
+    let testObj = {
+        my_arrow_method: whats_my_context_in_arrow_function
+    }
+    console.log("call whats_my_context_in_arrow_function as a method")
+    this_in_arrow_function = testObj.my_arrow_method()
+    console.log("return this in directly called method function: ", this_in_arrow_function)
+    /* Test 'this' in arrow function */
+
+
+    /* Test 'this' in normal function, this is point to window object in directly called and point to the object that method below to*/
+    console.log("call whats_my_context_in_normal_function function directly")
+    let this_in_normal_function = whats_my_context_in_normal_function()
+    console.log("return this in directly called normal function: ", this_in_normal_function)
+    testObj = {
+        my_normal_method: whats_my_context_in_normal_function
+    }
+    this_in_normal_function = testObj.my_normal_method()
+    console.log("return this in directly called method function: ", this_in_normal_function)
+    /* Test 'this' in normal function */
+
+    /* Test 'this' in constructor function, this is point to a new object */
+    function Constructor(name) {
+        this.objectName = name
+        this.constructor_normal_method = function () {
+            return this
+        }
+        this.constructor_arrow_method = () => this
+    }
+    const c1 = new Constructor("c1")
+    const c2 = new Constructor("c2")
+    const c1_this_from_normal_method = c1.constructor_normal_method()
+    const c2_this_from_normal_method = c2.constructor_normal_method()
+    const c1_this_from_arrow_method = c1.constructor_arrow_method()
+    const c2_this_from_arrow_method = c2.constructor_arrow_method()
+    console.log("normal method in c1 object based on constructor function return 'this' as: ", c1_this_from_normal_method)
+    console.log("normal method in c2 object based on constructor function return 'this' as: ", c2_this_from_normal_method)
+    console.log("arrow method in c1 object based on constructor function return 'this' as: ", c1_this_from_arrow_method)
+    console.log("arrow method in c2 object based on constructor function return 'this' as: ", c2_this_from_arrow_method)
+    /* Test 'this' in constructor function */
+</script>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>constructor test</title>
+</head>
+
+<body>
+</body>
+<script>
+    function Constructor1() {
+        this.status = true
+        return 1    //will ignore in "new" syntax
+    }
+
+    const testObj = {
+        status: true
+    }
+
+    function Constructor2() {
+        this.status = false
+        return testObj  //will return as result in "new" syntax
+    }
+
+    //Constructor1 will return a new object based on Constructor1
+    const test1 = new Constructor1()
+    console.log(typeof test1)   //object
+    console.log(test1.status)   //true
+
+    //Constructor2 will return testObj but but not a new object based on Constructor2
+    const test2 = new Constructor2()
+    console.log(typeof test2)   //object
+    console.log(test2.status)   //true
+</script>
+
+</html>

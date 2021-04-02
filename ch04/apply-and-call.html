@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>apply and call</title>
+</head>
+
+<body>
+</body>
+<script>
+    function juggle() {
+        let result = 0
+        for (let i = 0; i < arguments.length; i++) {
+            result += arguments[i]
+        }
+        this.result = result
+    }
+
+    const obj1 = {}
+    const obj2 = {}
+
+    // the first parameter of apply and call is the context that juggle function will be executed
+    // the different between apply and call is how to pass the parameter. 
+    // we always use apply and call when we have to appoint a context which the function should be executed, like callback function
+    juggle.apply(obj1, [1, 2, 3])    //the second parameter is a array which includes the value that will pass to juggle function
+    juggle.call(obj2, 5, 6, 7)       //from the second parameter, all these parameters are the value that will pass to juggle function
+    console.log("obj1.result: ", obj1.result)
+    console.log("obj2.result: ", obj2.result)
+
+    // the classical sample
+    let max = Math.max(1, 2, 3)
+    console.log("call Math.max(1, 2, 3), the max is: ", max) //3
+
+    max = Math.max([1, 2, 3])
+    console.log("call Math.max([1, 2, 3]), the max is: ", max) //NaN, unexpected result
+
+    max = Math.max.apply(null, [1, 2, 3])
+    console.log("call Math.max.apply(null,[1, 2, 3]), the max is: ", max) //3
+
+    max = Math.max.call(null, 1, 2, 3)
+    console.log("call Math.max.call(null, 1, 2, 3), the max is: ", max) //3
+
+    // the best practise
+    max = Math.max(...[1, 2, 3])
+    console.log("call Math.max(...[1, 2, 3]), the max is: ", max) //3
+
+</script>
+
+</html>
