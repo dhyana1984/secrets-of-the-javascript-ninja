@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype</title>
+</head>
+<script>
+    const print = (...output) => console.log(...output)
+
+    function Person({ name, age, level }) {
+        this.name = name
+        this.age = age
+        let _level = level
+    }
+
+    print("Person's prototype:", Person.prototype)                              //{constructor, __proto__}
+    print("Person's prototype.constructor:", Person.prototype.constructor)      //Person
+    print("Person's constructor:", Person.constructor)                          //Function 
+
+    const jack = new Person({ name: "Jack", age: 25, level: 1 })
+    print("jack.prototype:", jack.prototype)                                //undefined
+    print("jack.constructor:", jack.constructor)                           //Person
+    print("ack.__proto__:", jack.__proto__)                                 //{constructor, __proto__}
+    print("jack.__proto__.constructor:", jack.__proto__.constructor)        //Person
+
+</script>
+
+<body>
+</body>
+
+</html>
