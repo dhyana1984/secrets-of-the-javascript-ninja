@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototype chain</title>
+</head>
+<script>
+    function Animal() {
+        this.animalRun = () => {
+            console.log("animal is running!")
+        }
+    }
+
+    function Dog() {
+        this.dogRun = () => {
+            console.log("dog is running!")
+        }
+    }
+    Dog.prototype = new Animal()
+
+
+    function Bichon() {
+
+    }
+    Bichon.prototype = new Dog()
+    const bichon = new Bichon()
+    console.log(bichon)
+
+    function Foo() {
+
+    }
+    Foo.prototype = new Bichon()
+
+
+    const foo = new Foo()
+    console.log(foo)
+    foo.animalRun()     //"animal is running!"
+    foo.dogRun()        //"dog is running!"
+</script>
+
+<body>
+
+</body>
+
+</html>
