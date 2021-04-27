@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prototype constructor</title>
+</head>
+<script>
+    function Person() { }
+    Person.prototype.dance = function () { }
+
+    function Ninja() { }
+    Ninja.prototype = new Person()
+
+    //We use defineProperty method to set some details and add property and into the object
+    Object.defineProperty(Ninja.prototype, "constructor", {
+        enumerable: false,
+        value: Ninja,
+        writable: true
+    })
+
+    const ninja = new Ninja()
+    console.log(ninja)  //contructor is back
+</script>
+
+<body>
+
+</body>
+
+</html>
