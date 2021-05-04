@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Event loop with tasks and microtasks</title>
+    <link rel="stylesheet" href="../assert.css">
+    <script src="../assert.js"></script>
+</head>
+
+<body>
+    <button id="firstButton">First button</button>
+    <button id="secondButton">Second button</button>
+    <script>
+        const firstButton = document.getElementById("firstButton");
+        const secondButton = document.getElementById("secondButton");
+        firstButton.addEventListener("click", function firstHandler() {
+            Promise.resolve().then(function () {
+                /*此Promise回调函数耗时 4 ms*/
+            });
+
+            /*firstHandler耗时 8 ms*/
+        });
+
+        secondButton.addEventListener("click", function secondHandler() {
+            /*secondHandler耗时 5ms*/
+        });
+		/*主线程代码耗时 15ms*/
+    </script>
+    <p>This code doesn't output anything</p>
+</body>
+
+</html>
